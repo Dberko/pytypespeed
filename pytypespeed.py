@@ -3,7 +3,6 @@ import termios, fcntl, sys, os
 counting = True
 counter = 0
 
-
 def timer():
 	global counter
 	global counting
