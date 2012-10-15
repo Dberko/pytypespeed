@@ -1,31 +1,32 @@
 import time
 import termios, fcntl, sys, os
-import Tkinter as tk
-b = True
-i = 0
-n = 0
-a = True
+counting = True
+counter = 0
+
+
 
 
 
 def timer():
-	global i
-	global n
-	global b
+	global counter
+	global counting
 	n = 0
-	while b == True:
-		global i	
+	while counting == True:
+		global counter	
 		time.sleep(1)
-		i+= 1
+		counter+= 1
+		#Tries to see if RETURN was pressed
 		try:
             		c = sys.stdin.read(1)
+			# \n means that user has hit RETURN
 			if c == "\n":
 				print "Timer has stopped"
-				a == False
 				break
         	except IOError: pass
-		print i
-def getkey():
+		print counter
+
+
+def getkey():		#Checks for keypress in background
 	fd = sys.stdin.fileno()
 
 	oldterm = termios.tcgetattr(fd)
@@ -46,7 +47,7 @@ def getkey():
 
 	
 getkey()
-print "You're time was %d"% i
+print "You're time was %d"% counter
 
 
 
