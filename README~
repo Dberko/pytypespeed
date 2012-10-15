@@ -1,0 +1,12 @@
+VERSION .1a
+
+Pytypespeed is a script to compute a user's average typing speed in words per minute. Using a prompt, the user will begin to retype the
+prompt, initializing a timer, and then, when done, the average words per minute will be reproduced along with error margin. 
+
+TODO:
+	Create prompt
+	start timer when user begins reproducing said prompt
+	calculate words per minute
+	Get error margin in percent
+	Save to file to make a "scoreboard"
+	Have players login to see their different scores
