@@ -1,50 +1,43 @@
-import time
-import termios, fcntl, sys, os
-counting = True
-counter = 0
-
-def timer():
-	global counter
-	global counting
-	n = 0
-	while counting == True:
-		global counter	
-		time.sleep(1)
-		counter+= 1
-		#Tries to see if RETURN was pressed
-		try:
-            		c = sys.stdin.read(1)
-			# \n means that user has hit RETURN
-			if c == "\n":
-				print "Timer has stopped"
-				break
-        	except IOError: pass
-		print counter
+from time import time
+i = 0
+cs = False
+prompt = "A lot of things remind me of my father who passed" ## away when I was 24. Driving on certain back roads he showed me. Stopping at certain stores he always used to go to. Eating at his favorite places. More and more of these places are fading away too though. The roads keep getting built up more and more. The shops and restaurants are closing down. At first it was heart breaking that my father wasn't in this world anymore. But slowly the things that remind me of him are leaving this world as well.A lot of things remind me of my father who passed away when I was 24. Driving on certain back roads he showed me. Stopping at certain stores he always used to go to. Eating at his favorite places. More and more of these places are fading away too though. The roads keep getting built up more and more. The shops and restaurants are closing down. At first it was heart breaking that my father wasn't in this world anymore. But slowly the things that remind me of him are leaving this world as well."
 
 
-def getkey():		#Checks for keypress in background
-	fd = sys.stdin.fileno()
-
-	oldterm = termios.tcgetattr(fd)
-	newattr = termios.tcgetattr(fd)
-	newattr[3] = newattr[3] & ~termios.ICANON & ~termios.ECHO
-	termios.tcsetattr(fd, termios.TCSANOW, newattr)
-
-	oldflags = fcntl.fcntl(fd, fcntl.F_GETFL)
-	fcntl.fcntl(fd, fcntl.F_SETFL, oldflags | os.O_NONBLOCK)
-
-	try:
-    		timer()
-			
-
-	finally:
-    		termios.tcsetattr(fd, termios.TCSAFLUSH, oldterm)
-    		fcntl.fcntl(fd, fcntl.F_SETFL, oldflags)
-
-	
-getkey()
-print "You're time was %d"% counter
+def counter():
+	i = 0 
+	print prompt
+	raw_input(">> Press ENTER to begin")
+	begin_time = time()
+	inp = raw_input()
+	end_time = time()
+	final_time = (end_time - begin_time) / 60
+	return final_time, inp
 
 
+def wpm(time, line):
+	words = line.split()
+	word_length = len(words)
+	words_per_m = word_length / time
+	return words_per_m
 
 
+def wordcheck(inp):
+	prompts = prompt.split()
+	inputs = inp.split()
+	errorcount = 0
+	pairs = zip(inputs, prompts)
+	for pair in pairs:
+		(inputted, accepted) = pair
+		if inputted != accepted:
+			errorcount += 1
+	return errorcount
+
+tm, line = counter()
+tm = round(tm, 2)
+words_per_minute = wpm(tm, line)
+words_per_minute = round(words_per_minute, 2)
+print("You total time was: %r minutes")% tm
+print("with an average of: %r words per minute")% words_per_minute
+errorcount = wordcheck(line)
+print("with %r spelling errors") % errorcount
