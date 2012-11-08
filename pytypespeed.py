@@ -38,7 +38,7 @@ def wordcheck(inp):
 		else:
 			idx += 1
 	correct = float(len(prompts)) - float(errorcount)
-	percentage = 100 - ((float(correct) / float(len(prompts))) * 100)
+	percentage = ((float(correct) / float(len(prompts))) * 100)
 	
 	return percentage
 
@@ -51,4 +51,4 @@ print("You total time was: %r minutes")% tm
 print("with an average of: %r words per minute")% words_per_minute
 percentage = wordcheck(line)
 percentager = round(percentage, 2)
-print("with an accuracy of %r %% correct") % percentager
+print("with an accuracy of: %r %% accuracy") % percentager
