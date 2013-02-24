@@ -37,10 +37,15 @@ def wordcheck(inp):
 				idx += 1
 		else:
 			idx += 1
+<<<<<<< HEAD
 
 	words_left = len(prompts) - len(inputs)
 	correct = float(len(prompts)) - float(errorcount)
 	percentage = (((float(correct) / float(len(prompts))) - float(words_left) / float(len(prompts))) * 100)
+=======
+	correct = float(len(prompts)) - float(errorcount)
+	percentage = ((float(correct) / float(len(prompts))) * 100)
+>>>>>>> 6ede4ccec69478f2c623aed14d39acbc88a624c2
 	
 	return percentage
 
@@ -54,4 +59,7 @@ print("with an average of: %r words per minute")% words_per_minute
 percentage = wordcheck(line)
 percentager = round(percentage, 2)
 print("with an accuracy of: %r %% accuracy") % percentager
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6ede4ccec69478f2c623aed14d39acbc88a624c2
