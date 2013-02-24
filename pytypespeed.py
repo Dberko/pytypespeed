@@ -54,3 +54,4 @@ print("with an average of: %r words per minute")% words_per_minute
 percentage = wordcheck(line)
 percentager = round(percentage, 2)
 print("with an accuracy of: %r %% accuracy") % percentager
+
